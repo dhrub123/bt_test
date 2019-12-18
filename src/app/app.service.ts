@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Transaction } from './transaction.model';
+import { Transactions } from './transaction.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,7 +17,7 @@ export class AppService {
                           + "&paymentProcessor=BRAINTREE&fundingSource=braintree"
                           + "&startIndex=1&limit=1000&currency=AUD";
   constructor(private http : HttpClient) { }
-  getTransactions() : Observable<Transaction>{
-    return this.http.get<Transaction>(this.serviceUrl);
+  getTransactions() : Observable<Transactions>{
+    return this.http.get<Transactions>(this.serviceUrl);
   }
 }

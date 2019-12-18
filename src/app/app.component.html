@@ -1,29 +1,49 @@
-<style>
-</style>
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
 
-<div role="main">
-
-  
-      <div>
-        <span>{{title}} transactions</span>
-      </div>
-
-      
-      <div>
-            <mat-table [dataSource]="dataSource">
-               <ng-container matColumnDef="payment_instrument_token">
-                  <mat-header-cell *matHeaderCellDef> payment_instrument_token </mat-header-cell>
-                  <mat-cell *matCellDef="let transaction"> {{transaction.payment_instrument_token}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="transaction_type">
-                  <mat-header-cell *matHeaderCellDef> transaction_type </mat-header-cell>
-                  <mat-cell *matCellDef="let transaction"> {{transaction.transaction_type}} </mat-cell>
-                </ng-container>
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-      </div>
-
-</div>
-
-<router-outlet></router-outlet>
+<table class="mat-elevation-z8" mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="payment_instrument_token">
+    <mat-header-cell *matHeaderCellDef> Token </mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.payment_instrument_token}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="transaction_type">
+    <mat-header-cell *matHeaderCellDef> Transaction Type </mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.transaction_type}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="funding_source">
+    <mat-header-cell *matHeaderCellDef> Funding Source </mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.funding_source}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="funding_method">
+    <mat-header-cell *matHeaderCellDef> Funding Method</mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.funding_method}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="transaction_source">
+    <mat-header-cell *matHeaderCellDef> Transaction Source </mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.transaction_source}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="order_reference">
+    <mat-header-cell *matHeaderCellDef> Order Reference </mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.order_reference}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="business_date">
+    <mat-header-cell *matHeaderCellDef> Business Date</mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.business_date}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="response_code">
+    <mat-header-cell *matHeaderCellDef> Response Code</mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.response_code}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="authorization_code">
+    <mat-header-cell *matHeaderCellDef> Authorization Code</mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.authorization_code}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="processor_response_code">
+    <mat-header-cell *matHeaderCellDef> Processor Response Code</mat-header-cell>
+    <mat-cell *matCellDef="let transaction"> {{transaction.processor_response_code}} </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</table>
+<mat-paginator [pageSize]="20" [pageSizeOptions]="[20,40]" showFirstLastButtons></mat-paginator>
