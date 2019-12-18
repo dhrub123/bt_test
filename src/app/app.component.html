@@ -10,36 +10,18 @@
 
       
       <div>
-          <table>
-          <thead>
-            <tr>
-              <th>payment_instrument_token</th>
-              <th>transaction_type</th>
-              <th>funding_source</th>
-              <th>funding_method</th>
-              <th>transaction_source</th>
-              <th>order_reference</th>
-              <th>business_date</th>
-              <th>response_code</th>
-              <th>processor_response_code</th>
-              <th>authorization_code</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let transaction of data.transactions">
-              <td>{{transaction.payment_instrument_token}}</td>
-              <td>{{transaction.transaction_type}}</td>
-              <td>{{transaction.funding_source}}</td>
-              <td>{{transaction.funding_method}}</td>
-              <td>{{transaction.transaction_source}}</td>
-              <td>{{transaction.order_reference}}</td>
-              <td>{{transaction.business_date}}</td>
-              <td>{{transaction.response_code}}</td>
-              <td>{{transaction.processor_response_code}}</td>
-              <td>{{transaction.authorization_code}}</td>
-            </tr>
-          </tbody>
-        </table> 
+            <mat-table [dataSource]="dataSource">
+               <ng-container matColumnDef="payment_instrument_token">
+                  <mat-header-cell *matHeaderCellDef> payment_instrument_token </mat-header-cell>
+                  <mat-cell *matCellDef="let transaction"> {{transaction.payment_instrument_token}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="transaction_type">
+                  <mat-header-cell *matHeaderCellDef> transaction_type </mat-header-cell>
+                  <mat-cell *matCellDef="let transaction"> {{transaction.transaction_type}} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
       </div>
 
 </div>

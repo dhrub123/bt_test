@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
-
-export interface Transactions {
-    payment_instrument_token: string;
-    transaction_type: string;
-}
+import { Observable } from 'rxjs';
+import {DataSource} from '@angular/cdk/collections';
+import { Transaction } from './transaction.model';
 
 @Component({
   selector: 'app-root',
@@ -14,32 +12,19 @@ export interface Transactions {
 })
 export class AppComponent {
   title = 'braintree';
-  data: any=[]
-  transactions = {
-    payment_instrument_token : '',
-    transaction_type : ''
-  }
-
+  dataSource = new TransactionDataSource(this.appService);
+  displayedColumns = ['payment_instrument_token', 'transaction_type'];
   constructor(public appService: AppService){ }
 
   ngOnInit() {
-    this.TransactionsPage();
   }
+}
 
-  TransactionsPage(){
-    try {
-      this.appService.getTransactions()
-          .subscribe(
-            resp =>{
-              console.log(resp, "res");
-              this.data = resp
-            },
-            error => {
-              console.log(error, "error");
-            }
-          )
-    } catch (error) {
-       console.log(error);
-    }
-  }
+export class TransactionDataSource extends DataSource<any> {
+  constructor(public appService: AppService){
+    super();
+   }
+   connect(): Observable<Transaction>{
+      return this.appService.getTransactions();
+   } disconnect(){}
 }
